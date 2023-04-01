@@ -13,4 +13,19 @@ However, I'm using Provider.
 
 The provider class created (ListProvider), uses inheritance to extend the ChangeNotifier class...
 
-The entire application listens to data changes and uses data from the (ListProvider) by having either a (SingleProvider) or (MultiProvider) wrapping over the entry point of the application i.e (MaterialApp) in main.dart
+The entire application listens to data changes and uses data from the (ListProvider) by having either a (SingleProvider) or (MultiProvider) wrapping over the entry point of the application i.e (MaterialApp) in main.dart.
+
+Register your provider using any of these:
+    Provider
+    ListenableProvider
+    ChangeNotifierProvider
+    ValueListenableProvider
+    StreamProvider
+    FutureProvider etc
+    https://pub.dev/packages/provider#existing-providers 
+
+For this project I used (ChangeNotifierProvider) to register the (ListProvider) I created
+
+
+After defining your state globally, to use it in a specific widget/place,
+wrap that widget with (Consumer) make it as deep rooted in the project as possible. 

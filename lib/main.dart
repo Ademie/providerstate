@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_state/home.dart';
+import 'package:provider_state/list_provider.dart';
 
 
 void main() {
@@ -11,8 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
+    return MultiProvider(
+      providers: [
+        // register your provider
+        ChangeNotifierProvider(create: (context) => ListProvider())
+      ],
+      child: MaterialApp(
+        home: Home(),
+      ),
     );
   }
 }
