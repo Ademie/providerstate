@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/horizontal.dart';
+import 'package:provider_state/horizontal.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
