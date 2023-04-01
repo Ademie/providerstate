@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_state/horizontal.dart';
-
+import 'package:provider_state/list_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,53 +11,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<int> numbers = [1, 2, 3, 4];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            int last = numbers.last;
-            setState(() {
-              numbers.add(last + 1);
-            });
-          },
-          child: Icon(Icons.add),
-        ),
-        appBar: AppBar(),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                numbers.last.toString(),
-                style: TextStyle(fontSize: 30),
-              ),
-              IconButton(
+      home: Consumer<ListProvider>(
+        builder: ((context, numbersValue, child) => Scaffold(
+              floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Horizontal(
-                                numbers: numbers,
-                              )));
+                  numbersValue.add();
                 },
-                icon: Icon(Icons.forward),
+                child: Icon(Icons.add),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: numbers.length,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      numbers[index].toString(),
+              appBar: AppBar(),
+              body: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      numbersValue.numbers.last.toString(),
                       style: TextStyle(fontSize: 30),
-                    );
-                  },
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Horizontal()));
+                      },
+                      icon: Icon(Icons.forward),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: numbersValue.numbers.length,
+                        itemBuilder: (context, index) {
+                          return Text(
+                            numbersValue.numbers[index].toString(),
+                            style: TextStyle(fontSize: 30),
+                          );
+                        },
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            )),
       ),
     );
   }

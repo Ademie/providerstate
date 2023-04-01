@@ -6,5 +6,6 @@ class ListProvider extends ChangeNotifier {
   void add() {
     int last = numbers.last;
     numbers.add(last + 1);
+    notifyListeners();
   }
 }

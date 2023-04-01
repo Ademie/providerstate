@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_state/list_provider.dart';
 
 class Horizontal extends StatefulWidget {
-  final List<int> numbers;
-  const Horizontal({super.key, required this.numbers});
+  const Horizontal({
+    super.key,
+  });
 
   @override
   State<Horizontal> createState() => _HorizontalState();
@@ -11,31 +14,30 @@ class Horizontal extends StatefulWidget {
 class _HorizontalState extends State<Horizontal> {
   @override
   Widget build(BuildContext context) {
-    int last = widget.numbers.last;
-    return Scaffold(
-      appBar: AppBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            widget.numbers.add(last + 1);
-          });
-        },
-        child: Icon(Icons.add),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(last.toString()),
-            Expanded(
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.numbers.length,
-                    itemBuilder: (context, index) {
-                      return Text(widget.numbers[index].toString());
-                    }))
-          ],
-        ),
-      ),
+    return Consumer<ListProvider>(
+      builder: ((context, numbersValue, child) => Scaffold(
+            appBar: AppBar(),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                numbersValue.add();
+              },
+              child: Icon(Icons.add),
+            ),
+            body: Center(
+              child: Column(
+                children: [
+                  Text(numbersValue.numbers.last.toString()),
+                  Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: numbersValue.numbers.length,
+                          itemBuilder: (context, index) {
+                            return Text(numbersValue.numbers[index].toString());
+                          }))
+                ],
+              ),
+            ),
+          )),
     );
   }
 }

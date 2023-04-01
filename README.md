@@ -24,8 +24,10 @@ Register your provider using any of these:
     FutureProvider etc
     https://pub.dev/packages/provider#existing-providers 
 
-For this project I used (ChangeNotifierProvider) to register the (ListProvider) I created
+For this project I used (ChangeNotifierProvider) to register the (ListProvider) I created.
 
 
 After defining your state globally, to use it in a specific widget/place,
-wrap that widget with (Consumer) make it as deep rooted in the project as possible. 
+wrap that widget with (Consumer), while calling the type <ListProvider>
+
+Note don't forget to notifyListeners in your (ListProvider)
