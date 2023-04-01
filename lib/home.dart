@@ -33,10 +33,12 @@ class _HomeState extends State<Home> {
               ),
               IconButton(
                 onPressed: () {
-                  
                   Navigator.push(
-                    context,
-                      MaterialPageRoute(builder: (context) => Horizontal()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Horizontal(
+                                numbers: numbers,
+                              )));
                 },
                 icon: Icon(Icons.forward),
               ),
